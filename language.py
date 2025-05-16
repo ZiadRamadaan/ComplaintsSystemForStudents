@@ -67,6 +67,7 @@ TEXTS = {
         "admin_expander": "Are you an admin? Click here to log in",
         "student_info": "Student Information:",
         "first_login_warning": "Please change your default admin password from the settings.",
+        "change_password_title": "Change Admin Password",
     },
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
@@ -136,5 +137,6 @@ TEXTS = {
         "admin_expander": "هل أنت أدمن؟ اضغط هنا لتسجيل الدخول",
         "student_info": "بيانات الطالب:",
         "first_login_warning": "يرجى تغيير كلمة مرور الأدمن الافتراضية من الإعدادات.",
+        "change_password_title": "تغيير كلمة مرور الأدمن",
     }
 }
