@@ -30,7 +30,7 @@ def file_complaint(conn, texts):
                 else:
                     st.error("تم تقديم الشكوى ولكن فشل إرسال الإيميلات.")
             else:
-                st.error("رقم الطالب غير موجود في النظام.")
+                st.error(texts.get("student_not_found", "Student ID not found."))
                 
 
 def manage_complaints(conn, texts):
