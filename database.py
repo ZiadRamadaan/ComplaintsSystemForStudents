@@ -43,7 +43,8 @@ def initialize_db(conn):
     # بيانات الطلاب الافتراضية
     students_data = [
         ("30404141601782", "Esraa elmaghraby", "UG_31159886@ics.tanta.edu.eg", "3", "CS"),
-        ("30407271601155", "zyad ramadan", "UG_31159668@ics.tanta.edu.eg", "3", "CS")
+        ("30407271601155", "zyad ramadan", "UG_31159668@ics.tanta.edu.eg", "3", "CS"),
+        ("30401011609065" , "Mayar Muhamed" , "UG_31159354@ics.tanta.edu.eg" , "3" , "CS")
     ]
 
     cursor.executemany("""
