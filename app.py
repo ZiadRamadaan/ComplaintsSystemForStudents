@@ -147,14 +147,3 @@ if section == texts["analytics"] and st.session_state.authenticated:
 
 # Notifications
 display_notifications() # زر تسجيل الدخول
-if st.button(texts["login_button"], key="login_button"):
-    success, first_login = authenticate(username, password, conn)
-    if success:
-        st.session_state.authenticated = True
-        st.session_state.username = username
-        st.session_state.first_login = first_login
-        st.success(texts["login_success"])
-        st.experimental_rerun()  # استخدم st.experimental_rerun() بدل st.rerun()
-
-    else:
-        st.error(texts["login_error"])
