@@ -65,7 +65,7 @@ TEXTS = {
         "email_body_update": "Complaint ID {id} status changed to: {status}.",
         "notification_status": "Complaint ID {id} status updated to {status}.",
         "admin_expander": "Are you an admin? Click here to log in",
-        "student_info": "Student Information:"
+        "student_info": "Student Information:",
         "first_login_warning": "Please change your default admin password from the settings.",
     },
     "Arabic": {
