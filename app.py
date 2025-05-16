@@ -12,6 +12,10 @@ from analytics import show_analytics
 # Page config
 st.set_page_config(page_title="Complaints Management System", layout="wide")
 
+if "change_password_mode" not in st.session_state:
+    st.session_state.change_password_mode = False
+
+
 # إضافة ستايل الأزرار من الكود الأولاني
 st.markdown("""
     <style>
