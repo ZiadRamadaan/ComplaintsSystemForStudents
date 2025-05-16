@@ -5,7 +5,7 @@ from database import validate_student_id_only, load_data
 def file_complaint(conn, texts):
     st.title(texts["new_complaint"])
 
-    student_id = st.text_input(texts["student_id"])  # "Student ID" أو "الرقم القومي"
+    student_id = st.text_input(texts["student_id"])  # الرقم القومي أو Student ID حسب اللغة
     category = st.selectbox(texts["complaint_type"], texts["complaint_types"])
     priority = st.selectbox(texts["priority"], texts["priorities"])
     content = st.text_area(texts["complaint_content"])
@@ -26,10 +26,10 @@ def file_complaint(conn, texts):
                 st.error(texts.get("student_not_found", "Student ID not found."))
 
 def manage_complaints(conn, texts):
-    # إعداد mapping للحالات من الواجهة لقاعدة البيانات
+    # خرائط تحويل الحالات بين الواجهة وقاعدة البيانات
     status_display_to_db = {
         "Pending": "pending", "Reviewed": "reviewed", "Closed": "closed",
-        "قيد الانتظار": "pending", "قيد المراجعة": "reviewed", "مغلقة": "closed"
+        "قيد الانتظار": "pending", "تم المراجعة": "reviewed", "مغلقة": "closed"
     }
     status_db_to_display = {v: k for k, v in status_display_to_db.items()}
 
@@ -69,18 +69,24 @@ def manage_complaints(conn, texts):
                 st.write(f"Level: {complaint[8]}")
                 st.write(f"Department: {complaint[9]}")
 
+                # اختيار الحالة الجديدة من الواجهة
                 selected_display_status = st.selectbox(
                     texts["new_status"],
                     texts["statuses"],
                     index=texts["statuses"].index(current_status_display) if current_status_display in texts["statuses"] else 0
                 )
 
-                selected_db_status = status_display_to_db.get(selected_display_status, selected_display_status)
+                # تحويل الحالة إلى صيغة قاعدة البيانات
+                selected_db_status = status_display_to_db.get(selected_display_status)
 
-                if st.button(texts["update_button"]):
-                    cursor.execute("UPDATE complaints SET status = ? WHERE complaint_id = ?", (selected_db_status, complaint[0]))
-                    conn.commit()
-                    st.success(texts["status_updated"])
+                # تحقق من صحة الحالة
+                if selected_db_status not in ["pending", "reviewed", "closed"]:
+                    st.error("❌ الحالة المختارة غير صالحة للتحديث.")
+                else:
+                    if st.button(texts["update_button"]):
+                        cursor.execute("UPDATE complaints SET status = ? WHERE complaint_id = ?", (selected_db_status, complaint[0]))
+                        conn.commit()
+                        st.success(texts["status_updated"])
             else:
                 st.error(texts["no_complaint"])
     else:
