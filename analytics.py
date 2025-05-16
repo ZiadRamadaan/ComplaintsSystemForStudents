@@ -4,24 +4,21 @@ import plotly.io as pio
 import pandas as pd
 
 pio.templates.default = "plotly_white"
-colors = ["#03265b", "#416445", "#38b6ff", "#f39c12", "#c0392b"]
+
+colors = ["#03265b", "#416445", "#38b6ff"]
 
 def show_analytics(conn, texts):
     st.markdown("<h2 style='color:#2c3e50;'>Analytics</h2>", unsafe_allow_html=True)
 
     cursor = conn.cursor()
-    cursor.execute("SELECT complaint_id, student_id, description, type, priority, status, timestamp FROM complaints")
+    cursor.execute("SELECT complaint_id, student_id, description, type, status, timestamp FROM complaints")
     complaints_data = cursor.fetchall()
 
     if complaints_data:
         df = pd.DataFrame(complaints_data, columns=[
-            "id", "student_id", "description", "category", "priority", "status", "timestamp"
+            "id", "student_id", "description", "category", "status", "timestamp"
         ])
 
-        # تأكد من أن العمود الزمني بصيغة datetime
-        df["timestamp"] = pd.to_datetime(df["timestamp"], errors='coerce')
-
-        # KPIs
         total = len(df)
         resolved_statuses = ["resolved", "تم الحل", "solved", "closed", "مغلقة"]
         resolved = len(df[df["status"].str.lower().isin([s.lower() for s in resolved_statuses])])
@@ -35,35 +32,30 @@ def show_analytics(conn, texts):
 
         st.markdown("---")
 
-        # Charts Row 1: Category & Priority
+        # Charts Row 1: Category & Status
         row1_col1, row1_col2 = st.columns(2)
+
         with row1_col1:
             fig_cat = px.bar(df, x="category", color="category", title="Complaints by Category", color_discrete_sequence=colors)
             fig_cat.update_layout(title_font_size=18, title_font_color="#2c3e50")
             st.plotly_chart(fig_cat, use_container_width=True)
 
         with row1_col2:
-            fig_priority = px.pie(df, names="priority", title="Complaints by Priority", color_discrete_sequence=colors)
-            fig_priority.update_traces(textinfo="percent+label", pull=0.03)
-            fig_priority.update_layout(title_font_size=18, title_font_color="#2c3e50")
-            st.plotly_chart(fig_priority, use_container_width=True)
-
-        # Charts Row 2: Status & Time Trend
-        st.markdown("---")
-        row2_col1, row2_col2 = st.columns(2)
-
-        with row2_col1:
             fig_status = px.pie(df, names="status", title="Complaints by Status", color_discrete_sequence=colors)
             fig_status.update_traces(textinfo="percent+label", pull=0.03)
             fig_status.update_layout(title_font_size=18, title_font_color="#2c3e50")
             st.plotly_chart(fig_status, use_container_width=True)
 
-        with row2_col2:
+        # Charts Row 2: Complaints Over Time (if timestamp exists)
+        if "timestamp" in df.columns:
+            df["timestamp"] = pd.to_datetime(df["timestamp"])
             df["date"] = df["timestamp"].dt.date
-            trend_df = df.groupby("date").size().reset_index(name="complaints")
-            fig_trend = px.line(trend_df, x="date", y="complaints", markers=True, title="Complaints Over Time")
-            fig_trend.update_layout(title_font_size=18, title_font_color="#2c3e50")
-            st.plotly_chart(fig_trend, use_container_width=True)
+            df_by_date = df.groupby("date").size().reset_index(name="count")
+
+            st.markdown("### Complaints Over Time")
+            fig_time = px.line(df_by_date, x="date", y="count", title="Complaint Trend Over Time", markers=True, color_discrete_sequence=colors)
+            fig_time.update_layout(title_font_size=18, title_font_color="#2c3e50")
+            st.plotly_chart(fig_time, use_container_width=True)
 
     else:
         st.warning("No complaint data found in the database.")
