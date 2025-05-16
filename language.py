@@ -62,6 +62,9 @@ TEXTS = {
         "email_body_update": "Complaint ID {id} status changed to: {status}.",
         "notification_status": "Complaint ID {id} status updated to {status}.",
         "admin_expander": "Are you an admin? Click here to log in",
+"student_not_found": "Student ID not found.",
+"student_info": "Student Information:"
+
     },
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
@@ -125,6 +128,7 @@ TEXTS = {
         "email_subject_update": "تحديث حالة الشكوى",
         "email_body_update": "تم تغيير حالة الشكوى رقم {id} إلى: {status}.",
         "notification_status": "تم تحديث حالة الشكوى رقم {id} إلى {status}.",
-        "admin_expander": "هل أنت أدمن؟ اضغط هنا لتسجيل الدخول",
+        "admin_expander": "هل أنت أدمن؟ اضغط هنا لتسجيل الدخول","student_not_found": "الرقم القومي غير موجود في النظام.",
+"student_info": "بيانات الطالب:"
     }
 }
