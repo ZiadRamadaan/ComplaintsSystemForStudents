@@ -59,7 +59,8 @@ st.sidebar.subheader("Language")
 language = st.sidebar.selectbox("Select Language", ["English", "Arabic"], index=0 if st.session_state.language == "English" else 1)
 if language != st.session_state.language:
     st.session_state.language = language
-    st.rerun()
+    # st.rerun()
+    st.experimental_rerun()
 
 # Get language texts
 texts = TEXTS[st.session_state.language]
@@ -85,7 +86,8 @@ if not st.session_state.authenticated:
                 st.session_state.username = username
                 st.session_state.first_login = first_login  # تخزين قيمة first_login
                 st.success(texts["login_success"])
-                st.rerun()
+                # st.rerun()
+                st.experimental_rerun()
             else:
                 st.error(texts["login_error"])
 
@@ -113,7 +115,8 @@ if st.session_state.authenticated:
         
                     st.success("Password updated successfully!")
                     st.session_state.first_login = False
-                    st.rerun()
+                    # st.rerun()
+                    st.experimental_rerun()
                 else:
                     st.error("Old password is incorrect.")
                     
