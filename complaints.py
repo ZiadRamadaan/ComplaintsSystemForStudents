@@ -64,10 +64,14 @@ def manage_complaints(conn, texts):
                 st.write(f"Timestamp: {complaint[5]}")
                 st.write("---")
                 st.write(texts.get("student_info", "Student Information:"))
-                st.write(f"Name: {complaint[6]}")
-                st.write(f"Email: {complaint[7]}")
-                st.write(f"Level: {complaint[8]}")
-                st.write(f"Department: {complaint[9]}")
+                if all(complaint[6:10]):
+                    st.write(f"Name: {complaint[6]}")
+                    st.write(f"Email: {complaint[7]}")
+                    st.write(f"Level: {complaint[8]}")
+                    st.write(f"Department: {complaint[9]}")
+                else:
+                    st.warning("بيانات الطالب غير مكتملة أو غير موجودة.")
+
 
                 # اختيار الحالة الجديدة من الواجهة
                 selected_display_status = st.selectbox(
