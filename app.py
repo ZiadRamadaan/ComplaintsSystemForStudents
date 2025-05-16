@@ -18,10 +18,10 @@ if "change_password_mode" not in st.session_state:
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    st.image("images.jpeg", width=100, caption="Logo 1")
+    st.image("images.jpeg", width=200,)
 
 with col2:
-    st.image("download.jpeg", width=100, caption="Logo 2", use_column_width=False)
+    st.image("download.jpeg", width=200, use_column_width=False)
 
 # إضافة ستايل الأزرار من الكود الأولاني
 st.markdown("""
