@@ -101,6 +101,7 @@ TEXTS = {
         "admin_expander": "Are you an admin? Click here to log in",
         "student_info": "Student Information:",
         "log_out_success": "You have logged out successfully.",
+        "password_mismatch": "Passwords do not match.",
     },
     "Arabic": {
         # Titles and Sections
@@ -204,5 +205,6 @@ TEXTS = {
         "admin_expander": "هل أنت مسؤول؟ اضغط هنا لتسجيل الدخول",
         "student_info": "معلومات الطالب:",
         "log_out_success": "تم تسجيل الخروج بنجاح.",
+        "password_mismatch": "كلمة المرور غير متطابقة.",
     }
 }
