@@ -6,6 +6,7 @@ from complaints import file_complaint, manage_complaints
 from notifications import display_notifications
 from export import export_data
 from analytics import show_analytics
+from email_utils import send_complaint_email
 
 # ...
 
