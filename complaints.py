@@ -24,8 +24,14 @@ def file_complaint(conn, texts):
                 """, (student_id, content, category))
                 conn.commit()
                 st.session_state.notifications.append(texts["complaint_success"])
+                success = send_complaint_email(student_id, category, priority, content, st.session_state.language)
+                if success:
+                    st.success("تم تقديم الشكوى وإرسال الإيميلات بنجاح!")
+                else:
+                    st.error("تم تقديم الشكوى ولكن فشل إرسال الإيميلات.")
             else:
-                st.error(texts.get("student_not_found", "Student ID not found."))
+                st.error("رقم الطالب غير موجود في النظام.")
+                
 
 def manage_complaints(conn, texts):
     # خرائط تحويل الحالات بين الواجهة وقاعدة البيانات
