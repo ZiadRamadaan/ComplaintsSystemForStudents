@@ -5,7 +5,7 @@ import streamlit as st
 
 EMAIL_SENDER = st.secrets["email"]["sender"]
 EMAIL_PASSWORD = st.secrets["email"]["password"]
-EMAIL_RECEIVER = "mayarmuhamed058@gmail.com"
+EMAIL_RECEIVER = "esraamaghrabi14@gmail.com"  # Admin email
 
 # دالة جلب إيميل واسم الطالب
 def get_student_email(student_id):
