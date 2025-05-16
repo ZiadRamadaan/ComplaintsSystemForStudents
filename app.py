@@ -129,13 +129,8 @@ if st.session_state.authenticated:
         st.session_state.authenticated = False
         st.session_state.username = ""
         st.session_state.first_login = False
-        # فقط أعد تشغيل التطبيق دون إظهار رسالة هنا
-        st.experimental_rerun()
-
-if not st.session_state.authenticated and "just_logged_out" not in st.session_state:
-    st.session_state.just_logged_out = True
-    st.success("You have been logged out.")
-
+        st.success("You have been logged out.")
+        st.rerun()
         
 # File complaint (for normal users)
 if section == texts["file_complaint"] and not st.session_state.authenticated:
