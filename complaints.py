@@ -7,7 +7,7 @@ from email_utils import send_complaint_email
 def file_complaint(conn, texts):
     st.title(texts["new_complaint"])
 
-    student_id = st.text_input(texts["student_id"])  # الرقم القومي أو Student ID حسب اللغة
+    student_id = st.text_input(texts["student_id"]) 
     category = st.selectbox(texts["complaint_type"], texts["complaint_types"])
     priority = st.selectbox(texts["priority"], texts["priorities"])
     content = st.text_area(texts["complaint_content"])
@@ -93,7 +93,7 @@ def manage_complaints(conn, texts):
 
                 # تحقق من صحة الحالة
                 if selected_db_status not in ["pending", "reviewed", "closed"]:
-                    st.error("❌ الحالة المختارة غير صالحة للتحديث.")
+                    st.error("الحالة المختارة غير صالحة للتحديث.")
                 else:
                     if st.button(texts["update_button"]):
                         cursor.execute("UPDATE complaints SET status = ? WHERE complaint_id = ?", (selected_db_status, complaint[0]))
