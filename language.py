@@ -99,7 +99,8 @@ TEXTS = {
         # Sidebar and Misc
         "sidebar_change_password": "Change Password",
         "admin_expander": "Are you an admin? Click here to log in",
-        "student_info": "Student Information:"
+        "student_info": "Student Information:",
+        "log_out_success": "You have logged out successfully.",
     },
     "Arabic": {
         # Titles and Sections
@@ -201,6 +202,7 @@ TEXTS = {
         # Sidebar and Misc
         "sidebar_change_password": "تغيير كلمة المرور",
         "admin_expander": "هل أنت مسؤول؟ اضغط هنا لتسجيل الدخول",
-        "student_info": "معلومات الطالب:"
+        "student_info": "معلومات الطالب:",
+        "log_out_success": "تم تسجيل الخروج بنجاح.",
     }
 }
