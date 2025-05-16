@@ -102,6 +102,7 @@ TEXTS = {
         "student_info": "Student Information:",
         "log_out_success": "You have logged out successfully.",
         "password_mismatch": "Passwords do not match.",
+        "password_changed": "Password changed successfully.",
     },
     "Arabic": {
         # Titles and Sections
@@ -206,5 +207,6 @@ TEXTS = {
         "student_info": "معلومات الطالب:",
         "log_out_success": "تم تسجيل الخروج بنجاح.",
         "password_mismatch": "كلمة المرور غير متطابقة.",
+        "password_changed": "تم تغيير كلمة المرور بنجاح.",
     }
 }
