@@ -15,13 +15,13 @@ st.set_page_config(page_title="Complaints Management System", layout="wide")
 if "change_password_mode" not in st.session_state:
     st.session_state.change_password_mode = False
 
-col1, col2 = st.columns([1, 1])
+# col1, col2 = st.columns([1, 1])
 
-with col1:
-    st.image("images.jpeg", width=200)
+# with col1:
+#     st.image("images.jpeg", width=200)
 
-with col2:
-    st.image("download.jpeg", width=200, use_column_width=False)
+# with col2:
+#     st.image("download.jpeg", width=200, use_column_width=False)
     
 
 # إضافة ستايل الأزرار من الكود الأولاني
