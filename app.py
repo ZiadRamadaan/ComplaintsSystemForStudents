@@ -21,9 +21,8 @@ with col1:
     st.image("images.jpeg", width=200,)
 
 with col2:
-    st.markdown("<div style='text-align: right;'>", unsafe_allow_html=True)
     st.image("download.jpeg", width=200, use_column_width=False)
-     st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
     
 
 # إضافة ستايل الأزرار من الكود الأولاني
