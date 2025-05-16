@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
 from database import validate_student_id_only, load_data
+from email_utils import send_complaint_email
+
 
 def file_complaint(conn, texts):
     st.title(texts["new_complaint"])
