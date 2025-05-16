@@ -1,21 +1,54 @@
+%%writefile email_utils.py
 import smtplib
 from email.message import EmailMessage
+import sqlite3
 import streamlit as st
 
 EMAIL_SENDER = st.secrets["email"]["sender"]
 EMAIL_PASSWORD = st.secrets["email"]["password"]
-EMAIL_RECEIVER = "esraamaghrabi14@gmail.com"  # Admin email
+EMAIL_RECEIVER = "mayarmuhamed058@gmail.com"
 
-def send_email(user_email, name, category, priority, content, language="English"):
+# دالة جلب إيميل واسم الطالب
+def get_student_email(student_id):
+    print(f"Fetching student with ID: {student_id}")
     try:
-        # إنشاء رسالة المستخدم
-        msg_user = EmailMessage()
-        msg_user['From'] = EMAIL_SENDER
-        msg_user['To'] = user_email
+        conn = sqlite3.connect("university.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT email, name FROM students WHERE student_id = ?", (student_id,))
+        result = cursor.fetchone()
+        print(f"Query Result: {result}")
+        cursor.close()
+        conn.close()
+        if result:
+            return result[0], result[1]  # email, name
+        return None, None
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return None, None
 
+# دالة إرسال الإيميلات
+def send_complaint_email(student_id, category, priority, content, language="Arabic"):
+    print(f"Starting send_complaint_email with Student ID: {student_id}")
+    print(f"EMAIL_SENDER: {EMAIL_SENDER}")
+    print(f"EMAIL_PASSWORD: {'*' * len(EMAIL_PASSWORD)}")  # نخفي الباسورد للأمان
+
+    user_email, name = get_student_email(student_id)
+    print(f"Fetched Email: {user_email}, Name: {name}")
+
+    if not user_email:
+        print("Error: Student ID not found in database")
+        st.error("Student ID غير موجود في قاعدة البيانات")
+        return
+
+    try:
+        # إيميل الطالب
+        print(f"Preparing email for student: {user_email}")
+        msg_student = EmailMessage()
+        msg_student['From'] = EMAIL_SENDER
+        msg_student['To'] = user_email
         if language == "Arabic":
-            msg_user['Subject'] = "تم استلام الشكوى"
-            msg_user.set_content(
+            msg_student['Subject'] = "تم استلام الشكوى"
+            msg_student.set_content(
                 f"عزيزي {name},\n\n"
                 "تم استلام شكواك بنجاح وهي الآن قيد المراجعة من قبل فريقنا المختص.\n"
                 "سنعمل على التعامل معها في أسرع وقت ممكن.\n\n"
@@ -24,8 +57,8 @@ def send_email(user_email, name, category, priority, content, language="English"
                 "فريق إدارة الشكاوى"
             )
         else:
-            msg_user['Subject'] = "Complaint Received"
-            msg_user.set_content(
+            msg_student['Subject'] = "Complaint Received"
+            msg_student.set_content(
                 f"Dear {name},\n\n"
                 "We have received your complaint and it has been submitted to our system.\n"
                 "Our team is reviewing it and will take the necessary actions shortly.\n\n"
@@ -34,14 +67,22 @@ def send_email(user_email, name, category, priority, content, language="English"
                 "Complaints Management Team"
             )
 
-        # إنشاء رسالة الإدمن
+        print(f"Sending email to student: {user_email}")
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
+            smtp.send_message(msg_student)
+        print("Student email sent successfully!")
+
+        # إيميل الإدارة
+        print(f"Preparing email for admin: {EMAIL_RECEIVER}")
         msg_admin = EmailMessage()
         msg_admin['From'] = EMAIL_SENDER
         msg_admin['To'] = EMAIL_RECEIVER
         msg_admin['Subject'] = "New Complaint Submitted"
         msg_admin.set_content(
-            f"A new complaint has been submitted to the system:\n\n"
+            f"A new complaint has been submitted:\n\n"
             f"Name: {name}\n"
+            f"Student ID: {student_id}\n"
             f"Email: {user_email}\n"
             f"Category: {category}\n"
             f"Priority: {priority}\n"
@@ -49,14 +90,20 @@ def send_email(user_email, name, category, priority, content, language="English"
             "Please follow up on this complaint via the admin dashboard."
         )
 
-        # إرسال الرسالتين باستخدام اتصال SMTP واحد
+        print(f"Sending email to admin: {EMAIL_RECEIVER}")
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
-            smtp.send_message(msg_user)
             smtp.send_message(msg_admin)
+        print("Admin email sent successfully!")
 
-        st.success("تم إرسال الرسائل الإلكترونية بنجاح!")
+        st.success("تم إرسال الإيميلات بنجاح!")
 
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"Authentication Error: {e}")
+        st.error(f"خطأ في تسجيل الدخول: {e}")
+    except smtplib.SMTPException as e:
+        print(f"SMTP Error: {e}")
+        st.error(f"خطأ في إرسال الإيميل: {e}")
     except Exception as e:
-        st.error(f"حدث خطأ أثناء إرسال الرسائل: {e}")
-
+        print(f"General Error: {e}")
+        st.error(f"خطأ غير متوقع: {e}")
