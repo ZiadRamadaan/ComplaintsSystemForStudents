@@ -76,6 +76,7 @@ TEXTS = {
         "password_change_error": "Passwords do not match or invalid input.",
         "sidebar_change_password": "Change Password",
         "password_changed": "Password changed successfully.",
+        "incorrect_old_password": "The old password is incorrect.",
     },
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
@@ -154,5 +155,6 @@ TEXTS = {
         "password_change_error": "كلمتا المرور غير متطابقتين أو الإدخال غير صالح.",
         "sidebar_change_password": "تغيير كلمة المرور",
         "password_changed": "تم تغيير كلمة المرور بنجاح.",
+        "incorrect_old_password": "كلمة المرور القديمة غير صحيحة.",
     }
 }
