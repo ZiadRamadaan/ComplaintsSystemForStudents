@@ -116,7 +116,19 @@ if st.session_state.authenticated:
                     st.rerun()
                 else:
                     st.error("Old password is incorrect.")
+                    
+if st.session_state.authenticated:
+    if st.sidebar.button("Change Password", key="sidebar_change_password_button"):
+        st.session_state.change_password_mode = True
 
+if st.session_state.authenticated:
+    if st.sidebar.button("Log out", key="log_out_button"):
+        st.session_state.authenticated = False
+        st.session_state.username = ""
+        st.session_state.first_login = False
+        st.success("You have been logged out.")
+        st.experimental_rerun()
+        
 # File complaint (for normal users)
 if section == texts["file_complaint"] and not st.session_state.authenticated:
     file_complaint(conn, texts)
