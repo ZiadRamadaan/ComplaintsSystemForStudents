@@ -68,6 +68,7 @@ TEXTS = {
         "student_info": "Student Information:",
         "first_login_warning": "Please change your default admin password from the settings.",
         "change_password_title": "Change Admin Password",
+        "old_password": "Old Password",
     },
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
@@ -138,5 +139,6 @@ TEXTS = {
         "student_info": "بيانات الطالب:",
         "first_login_warning": "يرجى تغيير كلمة مرور الأدمن الافتراضية من الإعدادات.",
         "change_password_title": "تغيير كلمة مرور الأدمن",
+        "old_password": "كلمة المرور القديمة",
     }
 }
