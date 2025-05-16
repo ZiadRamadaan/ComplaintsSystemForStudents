@@ -19,7 +19,7 @@ col1, col2 = st.columns([1, 1])
 
 with col1:
     st.markdown("<div style='padding-left: 20px;'>", unsafe_allow_html=True)
-    st.image("logo1.png", width=100)
+    st.image("images.png", width=100)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
