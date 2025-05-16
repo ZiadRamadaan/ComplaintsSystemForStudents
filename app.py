@@ -96,27 +96,29 @@ sections = [texts["manage_complaints"], texts["analytics"], texts["export_data"]
 section = st.sidebar.selectbox(texts["select_section"], sections)
 
 # Show buttons only for authenticated admins
-if st.session_state.authenticated and st.session_state.change_password_mode:
-    st.subheader("Change Your Password")
-    old_password = st.text_input("Enter old password", type="password")
-    new_password = st.text_input("Enter new password", type="password")
-    confirm_password = st.text_input("Confirm new password", type="password")
+if st.session_state.authenticated:
+    if "first_login" in st.session_state and st.session_state.first_login:
+        st.warning("You are using the default password. Please change it to continue.")
     
-    if new_password != confirm_password:
-        st.warning("New password and confirmation do not match.")
-    else:
-        if st.button("Submit New Password"):
-            success = change_password(st.session_state.username, old_password, new_password, conn)
-            if success:
-                st.success("Password updated successfully!")
-                st.session_state.change_password_mode = False
-                st.experimental_rerun()
-            else:
-                st.error("Old password is incorrect.")
-    
-    if st.button("Cancel"):
-        st.session_state.change_password_mode = False
-        st.experimental_rerun()
+        st.subheader("Change Your Password")
+        old_password = st.text_input("Enter old password", type="password")
+        new_password = st.text_input("Enter new password", type="password")
+        confirm_password = st.text_input("Confirm new password", type="password")
+        
+        if new_password == confirm_password:
+            if st.button("Change Password"):
+                success = change_password(st.session_state.username, old_password, new_password, conn)
+                if success:
+                    cursor = conn.cursor()
+                    cursor.execute("UPDATE admins SET first_login = 0 WHERE username = ?", (st.session_state.username,))
+                    conn.commit()
+        
+                    st.success("Password updated successfully!")
+                    st.session_state.first_login = False
+                    # st.rerun()
+                    st.experimental_rerun()
+                else:
+                    st.error("Old password is incorrect.")
                     
 if st.session_state.authenticated:
     if st.sidebar.button("Change Password", key="sidebar_change_password_button"):
