@@ -141,7 +141,7 @@ if st.session_state.authenticated and st.session_state.change_password_mode:
 
 # Log out button
 if st.session_state.authenticated:
-    if st.sidebar.button(texts["log_out"]):
+    if st.sidebar.button(texts["logout"]):
         st.session_state.authenticated = False
         st.session_state.username = ""
         st.session_state.first_login = False
