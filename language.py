@@ -13,7 +13,6 @@ TEXTS = {
         "analytics": "Analytics",
         "export_data": "Export Data",
         "logout": "Log out",
-
         "new_complaint": "File a New Complaint",
         "student_id": "Student ID",
         "complaint_type": "Complaint Type",
@@ -22,50 +21,42 @@ TEXTS = {
         "priority": "Complaint Priority",
         "priorities": ["High", "Medium", "Low"],
         "priority_label": "Priority",
-
         "submit": "Submit",
         "fill_fields": "Please fill in all fields.",
         "complaint_success": "Complaint submitted successfully.",
         "complaint_email_success": "Complaint submitted and emails sent successfully!",
         "complaint_email_fail": "Complaint submitted, but failed to send emails.",
         "student_not_found": "Student ID not found.",
-
         "manage_complaints_title": "View and Manage Complaints",
         "filter_complaints": "Filter Complaints",
         "status": "Status",
         "type": "Type",
-
         "update_status": "Update Complaint Status",
         "complaint_id": "Complaint ID",
         "new_status": "Select New Status",
         "statuses": ["Pending", "Reviewed", "Closed"],
         "update_button": "Update Status",
         "status_updated": "Complaint status updated.",
-
         "satisfaction": "Customer Satisfaction Rating (Optional)",
         "rating": "Service Rating (1 to 5)",
         "feedback": "Additional Comments",
         "submit_rating": "Submit Rating",
         "rating_success": "Rating submitted. Thank you!",
-
         "search_complaint": "Search for Complaint by ID",
         "search_id": "Enter Complaint ID",
         "search_button": "Search",
         "complaint_details": "Complaint Details:",
         "no_complaint": "No complaint found with this ID.",
         "no_complaints": "No complaints registered.",
-
         "analytics_title": "Complaint Analytics",
         "by_category": "Complaints by Category",
         "by_status": "Complaints by Status",
         "status_distribution": "Status Distribution",
         "by_priority": "Complaints by Priority",
         "no_data": "No data available for analysis.",
-
         "export_title": "Export Data",
         "download_csv": "Download CSV",
         "no_data_export": "No data to export.",
-
         "notifications": "Notifications",
         "email_error": "Error while sending email: {e}",
         "email_subject_new": "New Complaint",
@@ -75,8 +66,8 @@ TEXTS = {
         "notification_status": "Complaint ID {id} status updated to {status}.",
         "admin_expander": "Are you an admin? Click here to log in",
         "student_info": "Student Information:"
+        "first_login_warning": "Please change your default admin password from the settings.",
     },
-
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
         "admin_login": "تسجيل دخول الأدمن",
@@ -91,7 +82,6 @@ TEXTS = {
         "analytics": "التحليلات",
         "export_data": "تصدير البيانات",
         "logout": "تسجيل الخروج",
-
         "new_complaint": "تقديم شكوى جديدة",
         "student_id": "الرقم القومي",
         "complaint_type": "نوع الشكوى",
@@ -100,50 +90,42 @@ TEXTS = {
         "priority": "أولوية الشكوى",
         "priorities": ["عالية", "متوسطة", "منخفضة"],
         "priority_label": "الأولوية",
-
         "submit": "إرسال",
         "fill_fields": "من فضلك، املأ جميع الحقول.",
         "complaint_success": "تم تقديم الشكوى بنجاح.",
         "complaint_email_success": "تم تقديم الشكوى وإرسال الإيميلات بنجاح!",
         "complaint_email_fail": "تم تقديم الشكوى ولكن فشل إرسال الإيميلات.",
         "student_not_found": "الرقم القومي غير موجود في النظام.",
-
         "manage_complaints_title": "عرض وإدارة الشكاوى",
         "filter_complaints": "تصفية الشكاوى",
         "status": "الحالة",
         "type": "النوع",
-
         "update_status": "تحديث حالة الشكوى",
         "complaint_id": "رقم الشكوى",
         "new_status": "اختر الحالة الجديدة",
         "statuses": ["قيد الانتظار", "تم المراجعة", "مغلقة"],
         "update_button": "تحديث الحالة",
         "status_updated": "تم تحديث حالة الشكوى.",
-
         "satisfaction": "تقييم رضا العملاء (اختياري)",
         "rating": "تقييم الخدمة (من 1 إلى 5)",
         "feedback": "تعليقات إضافية",
         "submit_rating": "إرسال التقييم",
         "rating_success": "تم إرسال التقييم. شكراً لك!",
-
         "search_complaint": "البحث عن شكوى برقم",
         "search_id": "أدخل رقم الشكوى",
         "search_button": "بحث",
         "complaint_details": "تفاصيل الشكوى:",
         "no_complaint": "لا توجد شكوى بهذا الرقم.",
         "no_complaints": "لا توجد شكاوى مسجلة.",
-
         "analytics_title": "تحليلات الشكاوى",
         "by_category": "الشكاوى حسب النوع",
         "by_status": "الشكاوى حسب الحالة",
         "status_distribution": "توزيع الحالات",
         "by_priority": "الشكاوى حسب الأولوية",
         "no_data": "لا توجد بيانات متاحة للتحليل.",
-
         "export_title": "تصدير البيانات",
         "download_csv": "تنزيل CSV",
         "no_data_export": "لا توجد بيانات للتصدير.",
-
         "notifications": "الإشعارات",
         "email_error": "خطأ أثناء إرسال البريد الإلكتروني: {e}",
         "email_subject_new": "شكوى جديدة",
@@ -152,6 +134,7 @@ TEXTS = {
         "email_body_update": "تم تغيير حالة الشكوى رقم {id} إلى: {status}.",
         "notification_status": "تم تحديث حالة الشكوى رقم {id} إلى {status}.",
         "admin_expander": "هل أنت أدمن؟ اضغط هنا لتسجيل الدخول",
-        "student_info": "بيانات الطالب:"
+        "student_info": "بيانات الطالب:",
+        "first_login_warning": "يرجى تغيير كلمة مرور الأدمن الافتراضية من الإعدادات.",
     }
 }
