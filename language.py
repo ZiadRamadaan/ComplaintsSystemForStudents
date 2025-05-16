@@ -69,6 +69,11 @@ TEXTS = {
         "first_login_warning": "Please change your default admin password from the settings.",
         "change_password_title": "Change Admin Password",
         "old_password": "Old Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "change_password_button": "Change Password",
+        "password_change_success": "Password changed successfully.",
+        "password_change_error": "Passwords do not match or invalid input.",
     },
     "Arabic": {
         "title": "نظام إدارة الشكاوى",
@@ -140,5 +145,10 @@ TEXTS = {
         "first_login_warning": "يرجى تغيير كلمة مرور الأدمن الافتراضية من الإعدادات.",
         "change_password_title": "تغيير كلمة مرور الأدمن",
         "old_password": "كلمة المرور القديمة",
+        "new_password": "كلمة المرور الجديدة",
+        "confirm_password": "تأكيد كلمة المرور",
+        "change_password_button": "تغيير كلمة المرور",
+        "password_change_success": "تم تغيير كلمة المرور بنجاح.",
+        "password_change_error": "كلمتا المرور غير متطابقتين أو الإدخال غير صالح.",
     }
 }
