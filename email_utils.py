@@ -1,4 +1,3 @@
-%%writefile email_utils.py
 import smtplib
 from email.message import EmailMessage
 import sqlite3
