@@ -8,18 +8,19 @@ def export_data(conn, texts):
     cursor.execute("SELECT * FROM complaints")
     complaints_data = cursor.fetchall()
 
-    df = pd.DataFrame(complaints_data, columns=[
-    "complaint_id",
-    "student_id",
-    "description",
-    "status",
-    "type",
-    "priority",
-    "timestamp"
-    ])
+    if complaints_data:
+        df = pd.DataFrame(complaints_data, columns=[
+            "complaint_id",
+            "student_id",
+            "description",
+            "status",
+            "type",
+            "priority",
+            "timestamp"
+        ])
 
-    csv = df.to_csv(index=False)
-    st.download_button(
+        csv = df.to_csv(index=False)
+        st.download_button(
             label=texts["download_csv"],
             data=csv,
             file_name="complaints_data.csv",
@@ -27,4 +28,3 @@ def export_data(conn, texts):
         )
     else:
         st.write(texts["no_data_export"])
-
