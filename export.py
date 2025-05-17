@@ -9,17 +9,17 @@ def export_data(conn, texts):
     complaints_data = cursor.fetchall()
 
     df = pd.DataFrame(complaints_data, columns=[
-        "complaint_id",
-        "student_id",
-        "description",
-        "status",
-        "type",
-        "priority",
-        "timestamp"
+    "complaint_id",
+    "student_id",
+    "description",
+    "status",
+    "type",
+    "priority",
+    "timestamp"
     ])
 
-        csv = df.to_csv(index=False)
-        st.download_button(
+    csv = df.to_csv(index=False)
+    st.download_button(
             label=texts["download_csv"],
             data=csv,
             file_name="complaints_data.csv",
