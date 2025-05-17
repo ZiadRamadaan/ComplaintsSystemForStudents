@@ -3,11 +3,10 @@ from datetime import datetime
 from database import validate_student_id_only, load_data
 from email_utils import send_complaint_email
 
-
 def file_complaint(conn, texts):
     st.title(texts["new_complaint"])
 
-    student_id = st.text_input(texts["student_id"]) 
+    student_id = st.text_input(texts["student_id"])
     category = st.selectbox(texts["complaint_type"], texts["complaint_types"])
     priority = st.selectbox(texts["priority"], texts["priorities"])
     content = st.text_area(texts["complaint_content"])
@@ -23,18 +22,12 @@ def file_complaint(conn, texts):
                     VALUES (?, ?, ?, 'pending', CURRENT_TIMESTAMP)
                 """, (student_id, content, category))
                 conn.commit()
-                st.session_state.notifications.append(texts["complaint_success"])
-                success = send_complaint_email(student_id, category, priority, content, st.session_state.language)
-                if success:
-                    st.success("تم تقديم الشكوى وإرسال الإيميلات بنجاح!")
-                else:
-                    st.error("تم تقديم الشكوى ولكن فشل إرسال الإيميلات.")
+                st.session_state.notifications.append("Complaint submitted successfully.")
+                send_complaint_email(student_id, category, priority, content, st.session_state.language)
             else:
-                st.error(texts.get("student_not_found", "Student ID not found."))
-                
+                st.error("Student ID not found.")
 
 def manage_complaints(conn, texts):
-    # خرائط تحويل الحالات بين الواجهة وقاعدة البيانات
     status_display_to_db = {
         "Pending": "pending", "Reviewed": "reviewed", "Closed": "closed",
         "قيد الانتظار": "pending", "تم المراجعة": "reviewed", "مغلقة": "closed"
@@ -78,22 +71,18 @@ def manage_complaints(conn, texts):
                     st.write(f"Level: {complaint[8]}")
                     st.write(f"Department: {complaint[9]}")
                 else:
-                    st.warning("بيانات الطالب غير مكتملة أو غير موجودة.")
+                    st.warning("Student information is incomplete or missing.")
 
-
-                # اختيار الحالة الجديدة من الواجهة
                 selected_display_status = st.selectbox(
                     texts["new_status"],
                     texts["statuses"],
                     index=texts["statuses"].index(current_status_display) if current_status_display in texts["statuses"] else 0
                 )
 
-                # تحويل الحالة إلى صيغة قاعدة البيانات
                 selected_db_status = status_display_to_db.get(selected_display_status)
 
-                # تحقق من صحة الحالة
                 if selected_db_status not in ["pending", "reviewed", "closed"]:
-                    st.error("الحالة المختارة غير صالحة للتحديث.")
+                    st.error("Invalid status selected.")
                 else:
                     if st.button(texts["update_button"]):
                         cursor.execute("UPDATE complaints SET status = ? WHERE complaint_id = ?", (selected_db_status, complaint[0]))
