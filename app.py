@@ -54,7 +54,7 @@ if st.session_state.authenticated:
         unsafe_allow_html=True
     )
     st.sidebar.markdown(
-        f"<div style='text-align: center; font-weight: bold; margin-bottom: 20px;'>admin page</div>",
+        f"<div style='text-align: center; font-weight: bold; margin-bottom: 20px;'>{st.session_state.username}</div>",
         unsafe_allow_html=True
     )
 
