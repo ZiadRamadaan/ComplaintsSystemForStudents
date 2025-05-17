@@ -95,7 +95,7 @@ def send_complaint_email(student_id, category, priority, content, language="Arab
             smtp.send_message(msg_admin)
         print("Admin email sent successfully!")
 
-                st.success("تم إرسال الإيميلات بنجاح!")
+        st.success("تم إرسال الإيميلات بنجاح!")
         return True
 
     except smtplib.SMTPAuthenticationError as e:
