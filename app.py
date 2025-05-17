@@ -48,7 +48,7 @@ if st.session_state.authenticated:
     st.sidebar.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-            <img src="https://cdn.pixabay.com/photo/2018/04/18/18/56/user-3331257_640.png" width="80">
+            <img src="https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" width="80">
         </div>
         """,
         unsafe_allow_html=True
