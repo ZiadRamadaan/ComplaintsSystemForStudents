@@ -18,14 +18,15 @@ def initialize_db(conn):
     )
     """)
 
-    # جدول الشكاوى
+    # Complaints table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS complaints (
         complaint_id INTEGER PRIMARY KEY AUTOINCREMENT,
         student_id TEXT,
         description TEXT NOT NULL,
         status TEXT CHECK(status IN ('pending', 'reviewed', 'closed')) DEFAULT 'pending',
-        type TEXT NOT NULL DEFAULT 'شكوى',
+        type TEXT NOT NULL DEFAULT 'complaint',
+        priority TEXT CHECK(priority IN ('low', 'medium', 'high')) DEFAULT 'medium',
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (student_id) REFERENCES students(student_id)
     )
