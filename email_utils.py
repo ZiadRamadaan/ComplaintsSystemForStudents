@@ -67,8 +67,6 @@ def send_complaint_email(student_id, category, priority, content, language="Engl
             smtp.send_message(msg_student)
             smtp.send_message(msg_admin)
 
-        # Show only one consistent success message
-        st.success("Complaint submitted successfully.")
         return True
 
     except smtplib.SMTPAuthenticationError as e:
