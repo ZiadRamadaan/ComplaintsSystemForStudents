@@ -15,7 +15,7 @@ st.set_page_config(page_title="Complaints Management System", layout="wide")
 st.markdown("""
     <style>
     .stButton > button {
-        background-color: #416445;
+        background-color: #5599ff;
         color: #FFFFFF !important;
         border: none;
         border-radius: 5px;
@@ -26,7 +26,7 @@ st.markdown("""
         text-align: center;
     }
     .stButton > button:hover {
-        background-color: #36543a;
+        background-color: #4177cc;
     }
     </style>
 """, unsafe_allow_html=True)
