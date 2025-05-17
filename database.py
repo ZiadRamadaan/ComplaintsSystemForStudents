@@ -26,7 +26,7 @@ def initialize_db(conn):
         description TEXT NOT NULL,
         status TEXT CHECK(status IN ('pending', 'reviewed', 'closed')) DEFAULT 'pending',
         type TEXT NOT NULL DEFAULT 'complaint',
-        priority TEXT CHECK(priority IN ('low', 'medium', 'high')) DEFAULT 'medium',
+        priority TEXT CHECK(priority IN ('Low', 'Medium', 'High')) DEFAULT 'medium',
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (student_id) REFERENCES students(student_id)
     )
