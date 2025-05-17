@@ -95,14 +95,18 @@ def send_complaint_email(student_id, category, priority, content, language="Arab
             smtp.send_message(msg_admin)
         print("Admin email sent successfully!")
 
-        st.success("تم إرسال الإيميلات بنجاح!")
+                st.success("تم إرسال الإيميلات بنجاح!")
+        return True
 
     except smtplib.SMTPAuthenticationError as e:
         print(f"Authentication Error: {e}")
         st.error(f"خطأ في تسجيل الدخول: {e}")
+        return False
     except smtplib.SMTPException as e:
         print(f"SMTP Error: {e}")
         st.error(f"خطأ في إرسال الإيميل: {e}")
+        return False
     except Exception as e:
         print(f"General Error: {e}")
         st.error(f"خطأ غير متوقع: {e}")
+        return False
