@@ -11,7 +11,10 @@ def show_analytics(conn, texts):
     st.markdown("<h2 style='color:#2c3e50;'>Analytics</h2>", unsafe_allow_html=True)
 
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM complaints")
+    cursor.execute("""
+    SELECT complaint_id, student_id, type, description, priority, status, timestamp
+    FROM complaints
+    """)
     complaints_data = cursor.fetchall()
 
     if complaints_data:
