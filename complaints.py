@@ -18,9 +18,10 @@ def file_complaint(conn, texts):
             if validate_student_id_only(student_id, conn):
                 cursor = conn.cursor()
                 cursor.execute("""
-                    INSERT INTO complaints (student_id, description, type, status, timestamp)
-                    VALUES (?, ?, ?, 'pending', CURRENT_TIMESTAMP)
-                """, (student_id, content, category))
+                    INSERT INTO complaints (student_id, description, type, priority, status, timestamp)
+                    VALUES (?, ?, ?, ?, 'pending', CURRENT_TIMESTAMP)
+                """, (student_id, content, category, priority))
+
                 conn.commit()
                 st.session_state.notifications.append("Complaint submitted successfully.")
                 send_complaint_email(student_id, category, priority, content, st.session_state.language)
@@ -46,7 +47,7 @@ def manage_complaints(conn, texts):
         if complaint_id:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT c.complaint_id, c.student_id, c.description, c.status, c.type, c.timestamp,
+                SELECT c.complaint_id, c.student_id, c.description, c.status, c.type, c.priority, c.timestamp,
                        s.name, s.email, s.level, s.department
                 FROM complaints c
                 LEFT JOIN students s ON c.student_id = s.student_id
@@ -62,7 +63,8 @@ def manage_complaints(conn, texts):
                 st.write(f"{texts['complaint_type']}: {complaint[4]}")
                 st.write(f"{texts['status']}: {current_status_display}")
                 st.write(f"{texts['complaint_content']}:\n{complaint[2]}")
-                st.write(f"Timestamp: {complaint[5]}")
+                st.write(f"{texts['priority']}: {complaint[5]}")
+                st.write(f"Timestamp: {complaint[6]}")
                 st.write("---")
                 st.write(texts.get("student_info", "Student Information:"))
                 if all(complaint[6:10]):
