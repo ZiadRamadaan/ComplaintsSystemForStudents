@@ -63,7 +63,7 @@ def manage_complaints(conn, texts):
             complaint = cursor.fetchone()
 
             if complaint:
-                current_status_display = status_display_map.get(complaint[3], complaint[3])
+                current_status_display = status_display.get(complaint[3], complaint[3])
                 st.subheader(texts["complaint_details"])
                 st.write(f"{texts['complaint_id']}: {complaint[0]}")
                 st.write(f"{texts['student_id']}: {complaint[1]}")
@@ -88,7 +88,7 @@ def manage_complaints(conn, texts):
                     index=texts["statuses"].index(current_status_display) if current_status_display in texts["statuses"] else 0
                 )
 
-                selected_db_status = status_display_to_db.get(selected_display_status)
+                selected_db_status = status_display_map.get(selected_display_status)
 
                 if selected_db_status not in ["pending", "reviewed", "closed"]:
                     st.error("Invalid status selected.")
