@@ -38,18 +38,14 @@ def manage_complaints(conn, texts):
     st.title(texts["manage_complaints_title"])
     complaints = load_data(conn)
 
-    status_keys_en = ["Pending", "Reviewed", "Closed"]
-    status_values_ar = ["قيد الانتظار", "تم المراجعة", "مغلقة"]
-
-    if selected_language == "English":
-        status_translation_map = dict(zip(status_values_ar, status_keys_en))
-    else:
-        status_translation_map = dict(zip(status_keys_en, status_values_ar))
-    
     if complaints:
-        for complaint in complaints:
-            status_display = status_translation_map.get(complaint[3], complaint[3])
-            st.write(f"{texts['complaint_id']}: {complaint[0]} | {texts['student_id']}: {complaint[1]} | {texts['status']}: {status_display}")
+    for complaint in complaints:
+        st.write(
+            f"{texts['complaint_id']}: {complaint[0]} | "
+            f"{texts['student_id']}: {complaint[1]} | "
+            f"{texts['status']}: {complaint[3]}"
+        )
+
 
 
 
