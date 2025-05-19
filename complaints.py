@@ -29,21 +29,22 @@ def file_complaint(conn, texts):
                 st.error("Student ID not found.")
 
 def manage_complaints(conn, texts):
-    status_display_to_db = {
-        "Pending": "pending", "Reviewed": "reviewed", "Closed": "closed",
-        "قيد الانتظار": "pending", "تم المراجعة": "reviewed", "مغلقة": "closed"
+    status_display_map = {
+        "pending": texts["statuses"][0],
+        "reviewed": texts["statuses"][1],
+        "closed": texts["statuses"][2],
     }
-    status_db_to_display = {v: k for k, v in status_display_to_db.items()}
-
+    
     st.title(texts["manage_complaints_title"])
     complaints = load_data(conn)
-
+    
     if complaints:
         for complaint in complaints:
+            status_display = status_display_map.get(complaint[3], complaint[3])
             st.write(
                 f"{texts['complaint_id']}: {complaint[0]} | "
                 f"{texts['student_id']}: {complaint[1]} | "
-                f"{texts['status']}: {complaint[3]}"
+                f"{texts['status']}: {status_display}"
             )
 
 
