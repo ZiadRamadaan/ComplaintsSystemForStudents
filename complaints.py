@@ -34,10 +34,13 @@ def manage_complaints(conn, texts):
         "reviewed": texts["statuses"][1],
         "closed": texts["statuses"][2],
     }
-    
+
+    # العكسي: من عربي/إنجليزي إلى db value
+    status_display_to_db = {v: k for k, v in status_display_map.items()}
+
     st.title(texts["manage_complaints_title"])
     complaints = load_data(conn)
-    
+
     if complaints:
         for complaint in complaints:
             status_display = status_display_map.get(complaint[3], complaint[3])
@@ -46,9 +49,6 @@ def manage_complaints(conn, texts):
                 f"{texts['student_id']}: {complaint[1]} | "
                 f"{texts['status']}: {status_display}"
             )
-
-
-
 
         complaint_id = st.text_input(texts["search_complaint"], "")
         if complaint_id:
@@ -63,7 +63,7 @@ def manage_complaints(conn, texts):
             complaint = cursor.fetchone()
 
             if complaint:
-                current_status_display = status_display.get(complaint[3], complaint[3])
+                current_status_display = status_display_map.get(complaint[3], complaint[3])
                 st.subheader(texts["complaint_details"])
                 st.write(f"{texts['complaint_id']}: {complaint[0]}")
                 st.write(f"{texts['student_id']}: {complaint[1]}")
@@ -75,10 +75,10 @@ def manage_complaints(conn, texts):
                 st.write("---")
                 st.write(texts.get("student_info", "Student Information:"))
                 if all(complaint[6:10]):
-                    st.write(f"Name: {complaint[6]}")
-                    st.write(f"Email: {complaint[7]}")
-                    st.write(f"Level: {complaint[8]}")
-                    st.write(f"Department: {complaint[9]}")
+                    st.write(f"Name: {complaint[7]}")
+                    st.write(f"Email: {complaint[8]}")
+                    st.write(f"Level: {complaint[9]}")
+                    st.write(f"Department: {complaint[10]}")
                 else:
                     st.warning("Student information is incomplete or missing.")
 
@@ -88,7 +88,7 @@ def manage_complaints(conn, texts):
                     index=texts["statuses"].index(current_status_display) if current_status_display in texts["statuses"] else 0
                 )
 
-                selected_db_status = status_display_map.get(selected_display_status)
+                selected_db_status = status_display_to_db.get(selected_display_status)
 
                 if selected_db_status not in ["pending", "reviewed", "closed"]:
                     st.error("Invalid status selected.")
@@ -100,4 +100,4 @@ def manage_complaints(conn, texts):
             else:
                 st.error(texts["no_complaint"])
     else:
-        st.write(texts["no_complaints"])
+        st.write(texts["no_compl_]()
