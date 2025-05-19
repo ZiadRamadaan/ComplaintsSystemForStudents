@@ -39,9 +39,13 @@ def manage_complaints(conn, texts):
     complaints = load_data(conn)
 
     if complaints:
+        status_keys = ["Pending", "Reviewed", "Closed"]
+        status_translation_map = dict(zip(status_keys, texts["statuses"]))
+        
         for complaint in complaints:
-            status_display = status_db_to_display.get(complaint[3], complaint[3])
+            status_display = status_translation_map.get(complaint[3], complaint[3])
             st.write(f"{texts['complaint_id']}: {complaint[0]} | {texts['student_id']}: {complaint[1]} | {texts['status']}: {status_display}")
+
 
         complaint_id = st.text_input(texts["search_complaint"], "")
         if complaint_id:
