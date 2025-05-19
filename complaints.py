@@ -63,7 +63,7 @@ def manage_complaints(conn, texts):
             complaint = cursor.fetchone()
 
             if complaint:
-                current_status_display = status_db_to_display.get(complaint[3], complaint[3])
+                current_status_display = status_display_map.get(complaint[3], complaint[3])
                 st.subheader(texts["complaint_details"])
                 st.write(f"{texts['complaint_id']}: {complaint[0]}")
                 st.write(f"{texts['student_id']}: {complaint[1]}")
