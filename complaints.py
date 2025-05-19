@@ -39,7 +39,7 @@ def manage_complaints(conn, texts):
     complaints = load_data(conn)
 
     status_keys_en = ["Pending", "Reviewed", "Closed"]
-status_values_ar = ["قيد الانتظار", "تم المراجعة", "مغلقة"]
+    status_values_ar = ["قيد الانتظار", "تم المراجعة", "مغلقة"]
 
     if selected_language == "English":
         status_translation_map = dict(zip(status_values_ar, status_keys_en))
