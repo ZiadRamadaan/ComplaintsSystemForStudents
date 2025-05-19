@@ -100,4 +100,5 @@ def manage_complaints(conn, texts):
             else:
                 st.error(texts["no_complaint"])
     else:
-        st.write(texts["no_compl_]()
+        st.write(texts["no_complaints"])
+
