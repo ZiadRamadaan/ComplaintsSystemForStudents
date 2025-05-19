@@ -39,12 +39,12 @@ def manage_complaints(conn, texts):
     complaints = load_data(conn)
 
     if complaints:
-    for complaint in complaints:
-        st.write(
-            f"{texts['complaint_id']}: {complaint[0]} | "
-            f"{texts['student_id']}: {complaint[1]} | "
-            f"{texts['status']}: {complaint[3]}"
-        )
+        for complaint in complaints:
+            st.write(
+                f"{texts['complaint_id']}: {complaint[0]} | "
+                f"{texts['student_id']}: {complaint[1]} | "
+                f"{texts['status']}: {complaint[3]}"
+            )
 
 
 
