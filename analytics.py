@@ -5,7 +5,7 @@ import pandas as pd
 
 pio.templates.default = "plotly_white"
 
-colors = ["#03265b", "#416445", "#9ea1a5"]
+colors = ["#03265b", "#36070a", "#416445"]
 
 def show_analytics(conn, texts):
     st.markdown("<h2 style='color:#2c3e50;'>Analytics</h2>", unsafe_allow_html=True)
