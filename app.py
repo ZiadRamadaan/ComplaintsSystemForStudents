@@ -52,7 +52,7 @@ st.markdown("""
             <img src="https://ci.tanta.edu.eg/images/logo.png" alt="Right Logo">
         </div>
         <div class="logo-right">
-            <img src="https://tdb.tanta.edu.eg/ebooks/assets/img/tanta-logo.png" alt="Left Logo">
+            <img src="https://tdb.tanta.edu.eg/ebooks/assets/img/tanta-logo.png" alt="Right Logo">
         </div>
     </div>
     </style>
