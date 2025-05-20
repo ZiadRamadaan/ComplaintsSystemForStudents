@@ -35,7 +35,6 @@ def manage_complaints(conn, texts):
         "closed": texts["statuses"][2],
     }
 
-    # العكسي: من عربي/إنجليزي إلى db value
     status_display_to_db = {v: k for k, v in status_display_map.items()}
 
     st.title(texts["manage_complaints_title"])
