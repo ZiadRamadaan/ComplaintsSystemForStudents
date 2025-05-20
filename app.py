@@ -11,26 +11,40 @@ from email_utils import send_complaint_email
 # Page config
 st.set_page_config(page_title="Complaints Management System", layout="wide")
 
-st.markdown(f"""
+# Button Styling
+st.markdown("""
     <style>
-    .admin-login-button {{
+    .stButton > button {
         background-color: #5599ff;
-        color: white;
+        color: #FFFFFF !important;
         border: none;
-        padding: 8px 15px;
         border-radius: 5px;
+        padding: 8px 15px !important; 
+        font-size: 14px !important;
         font-weight: bold;
-        cursor: pointer;
         transition: background-color 0.3s;
-    }}
-    .admin-login-button:hover {{
+        text-align: center;
+    }
+    .stButton > button:hover {
         background-color: #4177cc;
-    }}
-    .navbar-login {{
+    }
+    .custom-navbar {
+        background-color: #FFFFFF;
+        padding: 10px 20px;
         display: flex;
-        gap: 10px;
+        justify-content: space-between;
         align-items: center;
-    }}
+        direction: rtl;
+    }
+
+    .custom-navbar img {
+        height: 60px;
+    }
+
+    .logo-right, .logo-left {
+        display: flex;
+        align-items: center;
+    }
     </style>
 
     <div class="custom-navbar">
@@ -38,12 +52,7 @@ st.markdown(f"""
             <img src="https://tdb.tanta.edu.eg/ebooks/assets/img/tanta-logo.png" alt="Right Logo">
             <img src="https://ci.tanta.edu.eg/images/logo.png" alt="Right Logo">
         </div>
-        <div class="navbar-login">
-            <form action="" method="post">
-                <button name="admin_login_trigger" class="admin-login-button">تسجيل دخول الأدمن</button>
-            </form>
-        </div>
-    </div>
+    </style>
 """, unsafe_allow_html=True)
 
 # Session state initialization
@@ -57,11 +66,6 @@ if "username" not in st.session_state:
     st.session_state.username = ""
 if "change_password_mode" not in st.session_state:
     st.session_state.change_password_mode = False
-if "show_admin_login" not in st.session_state:
-    st.session_state.show_admin_login = False
-if st.session_state.get("admin_login_trigger"):
-    st.session_state.show_admin_login = True
-    st.experimental_rerun()
 
 # Sidebar avatar
 if st.session_state.authenticated:
@@ -94,8 +98,8 @@ initialize_db(conn)
 create_default_admin(conn, "admin", "1234")  # This function should already check if admin exists
 
 # Admin login UI
-if not st.session_state.authenticated and st.session_state.get("show_admin_login", False):
-    admin_login_expanded = st.expander(texts["admin_expander"], expanded=True)
+if not st.session_state.authenticated:
+    admin_login_expanded = st.expander(texts["admin_expander"], expanded=False)
     with admin_login_expanded:
         st.subheader(texts["admin_login"])
         username = st.text_input(texts["username"])
@@ -108,7 +112,6 @@ if not st.session_state.authenticated and st.session_state.get("show_admin_login
                 st.session_state.username = username
                 st.session_state.first_login = first_login
                 st.success(texts["login_success"])
-                st.session_state.show_admin_login = False
                 st.rerun()
             else:
                 st.error(texts["login_error"])
