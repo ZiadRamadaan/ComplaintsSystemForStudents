@@ -38,7 +38,7 @@ st.markdown("""
     }
 
     .custom-navbar img {
-        height: 80px;
+        height: 60px;
     }
 
     .logo-right, .logo-left {
