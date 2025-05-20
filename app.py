@@ -49,13 +49,9 @@ st.markdown("""
 
     <div class="custom-navbar">
         <div class="logo-right">
-            <img src="https://ci.tanta.edu.eg/images/logo.png" alt="Right Logo">
             <img src="https://tdb.tanta.edu.eg/ebooks/assets/img/tanta-logo.png" alt="Right Logo">
+            <img src="https://ci.tanta.edu.eg/images/logo.png" alt="Right Logo">
         </div>
-        <div class="logo-right">
-            
-        </div>
-    </div>
     </style>
 """, unsafe_allow_html=True)
 
