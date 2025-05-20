@@ -7,7 +7,6 @@ def get_db_connection():
 def initialize_db(conn):
     cursor = conn.cursor()
 
-    # جدول الطلاب
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS students (
         student_id TEXT PRIMARY KEY,
@@ -18,7 +17,6 @@ def initialize_db(conn):
     )
     """)
 
-    # Complaints table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS complaints (
         complaint_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,7 +30,6 @@ def initialize_db(conn):
     )
     """)
 
-    # جدول الأدمن
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS admins (
         username TEXT PRIMARY KEY,
@@ -41,7 +38,6 @@ def initialize_db(conn):
     )
     """)
 
-    # بيانات الطلاب الافتراضية
     students_data = [
         ("30404141601782", "Esraa elmaghraby", "UG_31159886@ics.tanta.edu.eg", "3", "CS"),
         ("30407271601155", "zyad ramadan", "UG_31159668@ics.tanta.edu.eg", "3", "CS"),
